@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   db:
-    image: postgres:11.5-alpine
+    image: postgres:12.3-alpine
     ports:
       - "54320:5432"
     environment:
@@ -11,9 +11,12 @@ services:
   app:
     env_file:
       - ../../.env
+    volumes:
+      - ../../src:/var/www/src:delegated
     build:
       context: ../../
       dockerfile: ./examples/docker/app/Dockerfile
     ports:
       - "80:8080"
       - "443:4430"
+
